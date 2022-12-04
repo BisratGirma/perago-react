@@ -1,14 +1,14 @@
-
 export interface App {
-    listOfCompany: Company[]
+  listOfCompany: Company[];
 }
 
 export interface Company {
-    name: string;
+  name: string;
+  bio?: string;
 }
 
 export interface Person {
-    head?: true;
-    name: string;
-    position: string;
+  head?: true;
+  name: string;
+  position: string;
 }

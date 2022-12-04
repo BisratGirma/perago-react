@@ -2,8 +2,8 @@
 import { MantineProvider } from "@mantine/core";
 // import { useForm } from "@mantine/form";
 import "./App.css";
-import AddButton from "./components/AddButton";
 import "./index.css";
+import CompanyList from "./pages/CompanyList";
 
 function App() {
   // const form = useForm({
@@ -14,7 +14,14 @@ function App() {
   // });
   return (
     <MantineProvider>
-      <AddButton label="Add an Organization" />
+      <CompanyList
+        companies={[
+          {
+            name: "Perago Systems",
+            bio: "A decent software company",
+          },
+        ]}
+      />
     </MantineProvider>
   );
 }
