@@ -1,31 +1,12 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { IconPlus } from "@tabler/icons";
-
-const style = css({
-  border: "1px solid #DCDCDC",
-  borderRadius: "50%",
-  cursor: "pointer",
-
-  "&:hover": {
-    backgroundColor: "#eeeeee",
-  },
-});
 
 const AddButton = ({ label }: { label: string }) => {
   return (
-    <div
-      css={{
-        width: 200,
-        height: 70,
-        padding: 3,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <IconPlus size={36} css={style} />
+    <div className="w-52 h-20 p-1 flex flex-col justify-center items-center">
+      <IconPlus
+        className="border-[1px_solid_#dcdcdc] rounded-full cursor-pointer hover:bg-[#eeeeee]"
+        size={36}
+      />
       <p>{label}</p>
     </div>
   );

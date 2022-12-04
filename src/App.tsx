@@ -1,9 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import { MantineProvider } from "@mantine/core";
 // import { useForm } from "@mantine/form";
 import "./App.css";
 import "./index.css";
-import CompanyList from "./pages/CompanyList";
+import Tree from "./pages/Tree";
+// import Home from "./pages/Home";
 
 function App() {
   // const form = useForm({
@@ -14,14 +14,7 @@ function App() {
   // });
   return (
     <MantineProvider>
-      <CompanyList
-        companies={[
-          {
-            name: "Perago Systems",
-            bio: "A decent software company",
-          },
-        ]}
-      />
+      <Tree />
     </MantineProvider>
   );
 }

@@ -8,7 +8,10 @@ export interface Company {
 }
 
 export interface Person {
-  head?: true;
+  id: number;
   name: string;
   position: string;
+  description?: string;
+  parent: number | "head";
+  childrens: Array<Person>;
 }
