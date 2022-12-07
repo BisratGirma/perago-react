@@ -11,7 +11,6 @@ const Home = () => {
 
   useEffect(() => {
     api.get("").then((r) => {
-      console.log(r.data[0]);
       setCompanies(r.data);
     });
   }, []);
@@ -29,10 +28,14 @@ const Home = () => {
       <div className="flex justify-end">
         <AddButton label="Add Organization" />
       </div>
-      <Grid justify="center">
+      <Grid justify="center" className="m-3 p-3">
         {companies.map((item) => {
           return (
-            <Grid.Col span={4}>
+            <Grid.Col
+              span={4}
+              className="flex justify-center"
+              key={item.id}
+            >
               <CompanyCard
                 id={item.id}
                 name={item.name}

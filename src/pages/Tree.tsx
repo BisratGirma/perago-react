@@ -3,6 +3,7 @@ import { Person } from "../types/model";
 import api from "../api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BriefTree from "../components/BriefTree";
 
 const Tree = () => {
   const { companyId } = useParams();
@@ -21,8 +22,9 @@ const Tree = () => {
   }
 
   return (
-    <div>
+    <div className="flex">
       <TierList employee={person} />
+      <BriefTree person={person} />
     </div>
   );
 };

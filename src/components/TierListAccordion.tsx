@@ -16,15 +16,15 @@ const TierListAccordion = ({
         return (
           <Accordion.Item
             value="customization"
-            key={item.id}
+            key={item.attributes.id}
           >
             <Accordion.Control>
-              {item.name}, {item.position}
+              {item.name}, {item.attributes.position}
             </Accordion.Control>
             <Accordion.Panel>
               <div>
                 <TierListAccordion
-                  employee={item.childrens}
+                  employee={item.children}
                 />
               </div>
             </Accordion.Panel>

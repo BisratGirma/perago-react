@@ -5,10 +5,13 @@ export interface Company {
 }
 
 export interface Person {
-  id: number;
   name: string;
-  position: string;
-  description?: string;
-  parent: number | "head";
-  childrens: Array<Person>;
+  attributes: {
+    id: number;
+    position: string;
+    description?: string;
+    parent: number | "head";
+  };
+
+  children: Array<Person>;
 }

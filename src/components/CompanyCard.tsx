@@ -10,7 +10,7 @@ const CompanyCard = ({ id, name, bio }: Company) => {
 
   return (
     <div
-      className="w-44 h-28 p-3 shadow-4side rounded-lg cursor-pointer"
+      className="w-72 h-36 p-3 shadow-4side rounded-lg cursor-pointer"
       onClick={handleClick}
     >
       <h6>{name}</h6>
