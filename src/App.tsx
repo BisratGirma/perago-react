@@ -1,9 +1,25 @@
 import { MantineProvider } from "@mantine/core";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 // import { useForm } from "@mantine/form";
 import "./App.css";
 import "./index.css";
+import Home from "./pages/Home";
 import Tree from "./pages/Tree";
-// import Home from "./pages/Home";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    // errorElement: <ErrorPage />,
+  },
+  {
+    path: "/:companyId",
+    element: <Tree />,
+  },
+]);
 
 function App() {
   // const form = useForm({
@@ -14,7 +30,7 @@ function App() {
   // });
   return (
     <MantineProvider>
-      <Tree />
+      <RouterProvider router={router} />
     </MantineProvider>
   );
 }

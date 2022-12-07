@@ -1,10 +1,22 @@
 import { Grid } from "@mantine/core";
+import { useEffect, useState } from "react";
+import api from "../api";
 import AddButton from "../components/AddButton";
 import CompanyCard from "../components/CompanyCard";
 import { Company } from "../types/model";
 
-const Home = ({ companies }: { companies: Company[] }) => {
-  if (companies.length === 0) {
+const Home = () => {
+  const [companies, setCompanies] =
+    useState<Array<Company>>();
+
+  useEffect(() => {
+    api.get("").then((r) => {
+      console.log(r.data[0]);
+      setCompanies(r.data);
+    });
+  }, []);
+
+  if (!companies || companies.length === 0) {
     return (
       <div className="flex justify-center">
         <AddButton label="Add Organization" />
@@ -22,6 +34,7 @@ const Home = ({ companies }: { companies: Company[] }) => {
           return (
             <Grid.Col span={4}>
               <CompanyCard
+                id={item.id}
                 name={item.name}
                 bio={item.bio}
               />

@@ -1,8 +1,5 @@
-export interface App {
-  listOfCompany: Company[];
-}
-
 export interface Company {
+  id: string;
   name: string;
   bio?: string;
 }

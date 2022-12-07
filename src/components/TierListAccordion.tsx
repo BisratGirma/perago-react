@@ -14,9 +14,12 @@ const TierListAccordion = ({
     <Accordion defaultValue="customization">
       {employee.map((item) => {
         return (
-          <Accordion.Item value="customization">
+          <Accordion.Item
+            value="customization"
+            key={item.id}
+          >
             <Accordion.Control>
-              {item.name}
+              {item.name}, {item.position}
             </Accordion.Control>
             <Accordion.Panel>
               <div>
