@@ -8,41 +8,43 @@ import {
 import { IconPlus } from "@tabler/icons";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import api from "../api";
+import { Person } from "../types/model";
 
-interface CompanyForm {
+interface PersonForm {
   name: string;
-  bio: string;
+  position: string;
 }
 
-const AddButton = ({ label }: { label: string }) => {
+const AddPerson = ({ person }: { person: Person }) => {
   const [open, handleOpen] = useState(false);
   const handleModal = () => handleOpen(!open);
 
-  const { register, handleSubmit } = useForm<CompanyForm>();
-  const onSubmit: SubmitHandler<CompanyForm> = (data) => {
-    api
-      .post("", {
-        name: data.name,
-        bio: data.bio,
-      })
-      .then((r) => {
-        console.log(r);
-      });
+  const { register, handleSubmit } = useForm<PersonForm>();
+  const onSubmit: SubmitHandler<PersonForm> = (data) => {
+    const req = {
+      name: data.name,
+      attributes: {
+        position: data.position,
+        parent: person.attributes.id
+      },
+      children: []
+    }
+    // api
+    //   .post("", {
+    //     name: data.name,
+    //     bio: data.bio,
+    //   })
+    //   .then((r) => {
+    //     console.log(r);
+    //   });
     console.log(data);
   };
+
   return (
     <>
-      <div className="w-52 h-20 p-1 flex flex-col justify-center items-center">
-        <IconPlus
-          className="border-[1px_solid_#dcdcdc] rounded-full cursor-pointer hover:bg-[#eeeeee]"
-          size={36}
-          onClick={handleModal}
-        />
-        <p>{label}</p>
-      </div>
+      <IconPlus onClick={() => handleModal()} />
 
-      {/* Add Company Modal */}
+      {/* Add Person Modal */}
       <Modal opened={open} onClose={handleModal}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TypographyStylesProvider>
@@ -52,7 +54,10 @@ const AddButton = ({ label }: { label: string }) => {
           <TypographyStylesProvider>
             Bio *
           </TypographyStylesProvider>
-          <TextInput type="text" {...register("bio")} />
+          <TextInput
+            type="text"
+            {...register("position")}
+          />
           <div className="flex justify-end m-3 mb-1">
             <Button type="submit">Create</Button>
           </div>
@@ -62,4 +67,4 @@ const AddButton = ({ label }: { label: string }) => {
   );
 };
 
-export default AddButton;
+export default AddPerson;

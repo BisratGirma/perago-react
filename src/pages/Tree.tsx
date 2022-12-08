@@ -1,3 +1,4 @@
+import React from "react";
 import TierList from "../components/TierList";
 import { Person } from "../types/model";
 import api from "../api";

@@ -1,3 +1,4 @@
+import React from "react";
 import { TreeItem } from "@mui/lab";
 import { Person } from "../types/model";
 

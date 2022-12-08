@@ -1,3 +1,4 @@
+import React from "react";
 import { Grid } from "@mantine/core";
 import { useEffect, useState } from "react";
 import api from "../api";
@@ -6,8 +7,9 @@ import CompanyCard from "../components/CompanyCard";
 import { Company } from "../types/model";
 
 const Home = () => {
-  const [companies, setCompanies] =
-    useState<Array<Company>>();
+  const [companies, setCompanies] = useState<
+    Array<Company>
+  >();
 
   useEffect(() => {
     api.get("").then((r) => {

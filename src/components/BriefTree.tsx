@@ -1,3 +1,4 @@
+import React from "react";
 import { Person } from "../types/model";
 import Tree from "react-d3-tree";
 
