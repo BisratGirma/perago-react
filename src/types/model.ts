@@ -7,7 +7,7 @@ export interface Company {
 export interface Person {
   name: string;
   attributes: {
-    id: number;
+    id: string;
     position: string;
     description?: string;
     parent: number | "head";

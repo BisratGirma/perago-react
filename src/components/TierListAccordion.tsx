@@ -1,37 +1,32 @@
-import { Accordion } from "@mantine/core";
+import { TreeItem } from "@mui/lab";
 import { Person } from "../types/model";
 
 const TierListAccordion = ({
   employee,
 }: {
-  employee: Array<Person>;
+  employee: Person;
 }) => {
-  if (employee.length === 0) {
-    return <div></div>;
-  }
-
   return (
-    <Accordion defaultValue="customization">
-      {employee.map((item) => {
+    <TreeItem
+      label={
+        employee.name + ", " + employee.attributes.position
+      }
+      nodeId={employee.attributes.id}
+    >
+      {employee.children.map((item: Person) => {
         return (
-          <Accordion.Item
-            value="customization"
+          <TreeItem
+            label={
+              item.name + ", " + item.attributes.position
+            }
+            nodeId={item.attributes.id}
             key={item.attributes.id}
           >
-            <Accordion.Control>
-              {item.name}, {item.attributes.position}
-            </Accordion.Control>
-            <Accordion.Panel>
-              <div>
-                <TierListAccordion
-                  employee={item.children}
-                />
-              </div>
-            </Accordion.Panel>
-          </Accordion.Item>
+            <TierListAccordion employee={item} />
+          </TreeItem>
         );
       })}
-    </Accordion>
+    </TreeItem>
   );
 };
 

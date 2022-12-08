@@ -7,6 +7,7 @@ import {
 import { IconPlus } from "@tabler/icons";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import api from "../api";
 
 interface CompanyForm {
   name: string;
@@ -19,6 +20,14 @@ const AddButton = ({ label }: { label: string }) => {
 
   const { register, handleSubmit } = useForm<CompanyForm>();
   const onSubmit: SubmitHandler<CompanyForm> = (data) => {
+    api
+      .post("", {
+        name: data.name,
+        bio: data.bio,
+      })
+      .then((r) => {
+        console.log(r);
+      });
     console.log(data);
   };
   return (
@@ -43,7 +52,7 @@ const AddButton = ({ label }: { label: string }) => {
             Bio *
           </TypographyStylesProvider>
           <TextInput type="text" {...register("bio")} />
-          <div className="flex justify-end m-3">
+          <div className="flex justify-end m-3 mb-1">
             <Button type="submit">Create</Button>
           </div>
         </form>
