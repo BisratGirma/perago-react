@@ -1,4 +1,3 @@
-import React from "react";
 import TierList from "../components/TierList";
 import { Person } from "../types/model";
 import api from "../api";
@@ -25,7 +24,7 @@ const Tree = () => {
   return (
     <div className="flex">
       <TierList employee={person} />
-      <BriefTree person={person} />
+      {/* <BriefTree person={person} /> */}
     </div>
   );
 };
