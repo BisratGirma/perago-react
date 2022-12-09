@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Modal,
@@ -9,6 +8,8 @@ import { IconPlus } from "@tabler/icons";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import api from "../api";
+import { useDispatch } from "react-redux";
+import { newValue } from "../app/store";
 
 interface CompanyForm {
   name: string;
@@ -16,6 +17,7 @@ interface CompanyForm {
 }
 
 const AddButton = ({ label }: { label: string }) => {
+  const dispatch = useDispatch();
   const [open, handleOpen] = useState(false);
   const handleModal = () => handleOpen(!open);
 
@@ -27,9 +29,9 @@ const AddButton = ({ label }: { label: string }) => {
         bio: data.bio,
       })
       .then((r) => {
-        console.log(r);
-      });
-    console.log(data);
+        dispatch(newValue(r.data));
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <>
@@ -54,7 +56,12 @@ const AddButton = ({ label }: { label: string }) => {
           </TypographyStylesProvider>
           <TextInput type="text" {...register("bio")} />
           <div className="flex justify-end m-3 mb-1">
-            <Button type="submit">Create</Button>
+            <Button
+              type="submit"
+              className="bg-blue-700 hover:bg-blue-900"
+            >
+              Create
+            </Button>
           </div>
         </form>
       </Modal>

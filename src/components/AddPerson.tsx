@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Modal,
@@ -25,10 +24,10 @@ const AddPerson = ({ person }: { person: Person }) => {
       name: data.name,
       attributes: {
         position: data.position,
-        parent: person.attributes.id
+        parent: person.attributes.id,
       },
-      children: []
-    }
+      children: [],
+    };
     // api
     //   .post("", {
     //     name: data.name,
@@ -42,24 +41,29 @@ const AddPerson = ({ person }: { person: Person }) => {
 
   return (
     <>
-      <IconPlus onClick={() => handleModal()} />
+      <IconPlus size={16} onClick={() => handleModal()} />
 
       {/* Add Person Modal */}
       <Modal opened={open} onClose={handleModal}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <TypographyStylesProvider>
-            Company Name *
+            Full Name *
           </TypographyStylesProvider>
           <TextInput type="text" {...register("name")} />
           <TypographyStylesProvider>
-            Bio *
+            Position *
           </TypographyStylesProvider>
           <TextInput
             type="text"
             {...register("position")}
           />
           <div className="flex justify-end m-3 mb-1">
-            <Button type="submit">Create</Button>
+            <Button
+              type="submit"
+              className="bg-blue-700 hover:bg-blue-900"
+            >
+              Create
+            </Button>
           </div>
         </form>
       </Modal>

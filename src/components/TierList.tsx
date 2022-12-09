@@ -1,25 +1,38 @@
-import React from "react";
-import { Button } from "@mantine/core";
-import { TreeView } from "@mui/lab";
 import {
-  IconArrowBarDown,
-  IconArrowBarUp,
-} from "@tabler/icons";
+  Accordion,
+  Button,
+  TypographyStylesProvider,
+} from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { Person } from "../types/model";
+import AddPerson from "./AddPerson";
 import TierListAccordion from "./TierListAccordion";
 
 const TierList = ({ employee }: { employee: Person }) => {
   const navigate = useNavigate();
   return (
     <div className="w-1/4 py-5 flex flex-col justify-between">
-      <TreeView
-        aria-label="file system navigator"
-        defaultCollapseIcon={<IconArrowBarUp />}
-        defaultExpandIcon={<IconArrowBarDown />}
+      <Accordion
+        defaultValue="customization"
+        className="border-0 border-l-2"
       >
-        <TierListAccordion employee={employee} />
-      </TreeView>
+        <Accordion.Item value="customization">
+          <Accordion.Control className="flex justify-between">
+            <TypographyStylesProvider>
+              {employee.name},{" "}
+              {employee.attributes.position}
+            </TypographyStylesProvider>
+            <AddPerson person={employee} />
+          </Accordion.Control>
+          <Accordion.Panel>
+            <div>
+              <TierListAccordion
+                employee={employee.children}
+              />
+            </div>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
 
       <Button onClick={() => navigate("/")} color="blue">
         Back to Home

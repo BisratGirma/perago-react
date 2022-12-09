@@ -1,4 +1,7 @@
-import { Grid } from "@mantine/core";
+import {
+  Grid,
+  TypographyStylesProvider,
+} from "@mantine/core";
 import { useEffect } from "react";
 import api from "../api";
 import AddButton from "../components/AddButton";
@@ -9,16 +12,21 @@ import { newValue } from "../app/store";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { companies } = useSelector((state: any) => state.companies);
+  const { companies } = useSelector(
+    (state: any) => state.companies
+  );
   useEffect(() => {
     api.get("").then((r) => {
       dispatch(newValue(r.data));
     });
-  }, []);
+  }, [companies]);
 
   return !(companies.length > 0) ? (
-    <div className="flex justify-center">
+    <div className="flex flex-col justify-center items-center">
       <AddButton label="Add Organization" />
+      <TypographyStylesProvider>
+        no Companies yet!, try adding one.
+      </TypographyStylesProvider>
     </div>
   ) : (
     <div>

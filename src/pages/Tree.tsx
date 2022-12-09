@@ -24,7 +24,7 @@ const Tree = () => {
   return (
     <div className="flex">
       <TierList employee={person} />
-      {/* <BriefTree person={person} /> */}
+      <BriefTree person={person} />
     </div>
   );
 };
