@@ -6,13 +6,13 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Person } from "../types/model";
 import AddPerson from "./AddPerson";
-import EditButton from "./EditButton";
 import TierListAccordion from "./TierListAccordion";
 
 const TierList = ({ employee }: { employee: Person }) => {
   const navigate = useNavigate();
+
   return (
-    <div className="w-1/4 py-5 flex flex-col justify-between">
+    <div className="w-1/4 h-screen border-r-[1px] border-r-slate-300 py-5 flex flex-col justify-between">
       <Accordion
         defaultValue="customization"
         className="border-0 border-l-2"
@@ -25,7 +25,6 @@ const TierList = ({ employee }: { employee: Person }) => {
             </TypographyStylesProvider>
             <div>
               <AddPerson person={employee} />
-              <EditButton person={employee} />
             </div>
           </Accordion.Control>
           <Accordion.Panel>
@@ -38,12 +37,14 @@ const TierList = ({ employee }: { employee: Person }) => {
         </Accordion.Item>
       </Accordion>
 
-      <Button
-        onClick={() => navigate("/")}
-        className="bg-blue-700 hover:bg-blue-900"
-      >
-        Back to Home
-      </Button>
+      <div className="flex justify-center">
+        <Button
+          onClick={() => navigate("/")}
+          className="bg-blue-700 hover:bg-blue-900 w-60"
+        >
+          Back to Home
+        </Button>
+      </div>
     </div>
   );
 };

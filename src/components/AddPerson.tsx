@@ -49,7 +49,7 @@ const AddPerson = ({
   return (
     <>
       <IconPlus
-        size={size === "small" ? 16 : 24}
+        size={size === "small" ? 16 : 42}
         color="green"
         onClick={() => handleModal()}
       />

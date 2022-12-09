@@ -7,7 +7,6 @@ import {
 import { IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-// import api from "../api";
 import { Person } from "../types/model";
 
 interface PersonForm {
@@ -15,7 +14,17 @@ interface PersonForm {
   position: string;
 }
 
-const EditButton = ({ person }: { person: Person }) => {
+const EditButton = ({
+  person,
+  setEmployee,
+  employees,
+}: {
+  person: Person;
+  employees: Array<Person>;
+  setEmployee: React.Dispatch<
+    React.SetStateAction<Person[]>
+  >;
+}) => {
   const [open, handleOpen] = useState(false);
   const handleModal = () => handleOpen(!open);
 
@@ -41,7 +50,11 @@ const EditButton = ({ person }: { person: Person }) => {
   };
 
   const handleDelete = () => {
-    // api.delete()
+    const filtered = employees.filter(
+      (item) => person.attributes.id !== item.attributes.id
+    );
+    setEmployee(filtered);
+    handleModal();
   };
 
   return (

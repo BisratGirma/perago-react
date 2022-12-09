@@ -2,6 +2,7 @@ import {
   Accordion,
   TypographyStylesProvider,
 } from "@mantine/core";
+import { useState } from "react";
 import { Person } from "../types/model";
 import AddPerson from "./AddPerson";
 import EditButton from "./EditButton";
@@ -11,6 +12,9 @@ const TierListAccordion = ({
 }: {
   employee: Array<Person>;
 }) => {
+  const [empList, setEmployee] =
+    useState<Array<Person>>(employee);
+
   if (employee.length === 0) {
     return <div></div>;
   }
@@ -20,7 +24,7 @@ const TierListAccordion = ({
       defaultValue="customization"
       className="border-0 border-l-2"
     >
-      {employee.map((item) => {
+      {empList.map((item) => {
         return (
           <Accordion.Item
             value="customization"
@@ -35,7 +39,11 @@ const TierListAccordion = ({
               </TypographyStylesProvider>
               <div className="flex">
                 <AddPerson person={item} />
-                <EditButton person={item} />
+                <EditButton
+                  person={item}
+                  employees={empList}
+                  setEmployee={setEmployee}
+                />
               </div>
             </Accordion.Control>
             <Accordion.Panel>
