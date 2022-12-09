@@ -18,9 +18,11 @@ const EditButton = ({
   person,
   setEmployee,
   employees,
+  setValues,
 }: {
   person: Person;
   employees: Array<Person>;
+  setValues: React.Dispatch<React.SetStateAction<Person>>;
   setEmployee: React.Dispatch<
     React.SetStateAction<Person[]>
   >;
@@ -30,23 +32,17 @@ const EditButton = ({
 
   const { register, handleSubmit } = useForm<PersonForm>();
   const onSubmit: SubmitHandler<PersonForm> = (data) => {
-    const req = {
-      //   name: data.name,
-      //   attributes: {
-      //     position: data.position,
-      //     parent: person.attributes.id,
-      //   },
-      //   children: [],
-    };
-    // api
-    //   .post("", {
-    //     name: data.name,
-    //     bio: data.bio,
-    //   })
-    //   .then((r) => {
-    //     console.log(r);
-    //   });
-    console.log(data);
+    const {
+      name,
+      attributes: { position, ...remaining },
+      ...filtred
+    } = person;
+    setValues({
+      name: data.name,
+      attributes: { position: data.position, ...remaining },
+      ...filtred,
+    });
+    handleModal();
   };
 
   const handleDelete = () => {
