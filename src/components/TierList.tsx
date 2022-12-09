@@ -6,6 +6,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Person } from "../types/model";
 import AddPerson from "./AddPerson";
+import EditButton from "./EditButton";
 import TierListAccordion from "./TierListAccordion";
 
 const TierList = ({ employee }: { employee: Person }) => {
@@ -22,7 +23,10 @@ const TierList = ({ employee }: { employee: Person }) => {
               {employee.name},{" "}
               {employee.attributes.position}
             </TypographyStylesProvider>
-            <AddPerson person={employee} />
+            <div>
+              <AddPerson person={employee} />
+              <EditButton person={employee} />
+            </div>
           </Accordion.Control>
           <Accordion.Panel>
             <div>

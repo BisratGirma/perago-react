@@ -4,6 +4,7 @@ import {
 } from "@mantine/core";
 import { Person } from "../types/model";
 import AddPerson from "./AddPerson";
+import EditButton from "./EditButton";
 
 const TierListAccordion = ({
   employee,
@@ -32,7 +33,10 @@ const TierListAccordion = ({
               >
                 {item.name}, {item.attributes.position}
               </TypographyStylesProvider>
-              <AddPerson person={item} />
+              <div className="flex">
+                <AddPerson person={item} />
+                <EditButton person={item} />
+              </div>
             </Accordion.Control>
             <Accordion.Panel>
               <div>

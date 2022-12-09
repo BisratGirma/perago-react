@@ -4,9 +4,10 @@ import {
   TextInput,
   TypographyStylesProvider,
 } from "@mantine/core";
-import { IconPlus } from "@tabler/icons";
+import { IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+// import api from "../api";
 import { Person } from "../types/model";
 
 interface PersonForm {
@@ -14,27 +15,20 @@ interface PersonForm {
   position: string;
 }
 
-const AddPerson = ({
-  person,
-  size = "small",
-}: {
-  person: Person;
-  size?: "large" | "small";
-}) => {
+const EditButton = ({ person }: { person: Person }) => {
   const [open, handleOpen] = useState(false);
   const handleModal = () => handleOpen(!open);
 
   const { register, handleSubmit } = useForm<PersonForm>();
   const onSubmit: SubmitHandler<PersonForm> = (data) => {
-    // api requset
-    // const req = {
-    //   name: data.name,
-    //   attributes: {
-    //     position: data.position,
-    //     parent: person.attributes.id,
-    //   },
-    //   children: [],
-    // };
+    const req = {
+      //   name: data.name,
+      //   attributes: {
+      //     position: data.position,
+      //     parent: person.attributes.id,
+      //   },
+      //   children: [],
+    };
     // api
     //   .post("", {
     //     name: data.name,
@@ -46,13 +40,13 @@ const AddPerson = ({
     console.log(data);
   };
 
+  const handleDelete = () => {
+    // api.delete()
+  };
+
   return (
     <>
-      <IconPlus
-        size={size === "small" ? 16 : 24}
-        color="green"
-        onClick={() => handleModal()}
-      />
+      <IconEdit size={16} onClick={() => handleModal()} />
 
       {/* Add Person Modal */}
       <Modal opened={open} onClose={handleModal}>
@@ -60,20 +54,29 @@ const AddPerson = ({
           <TypographyStylesProvider>
             Full Name *
           </TypographyStylesProvider>
-          <TextInput type="text" {...register("name")} />
+          <TextInput
+            type="text"
+            defaultValue={person.name}
+            {...register("name")}
+          />
           <TypographyStylesProvider>
             Position *
           </TypographyStylesProvider>
           <TextInput
+            defaultValue={person.attributes.position}
             type="text"
             {...register("position")}
           />
-          <div className="flex justify-end m-3 mb-1">
+          <div className="flex justify-between m-3 mb-1">
+            <IconTrash
+              className="hover:fill-red-600"
+              onClick={handleDelete}
+            />
             <Button
               type="submit"
               className="bg-blue-700 hover:bg-blue-900"
             >
-              Create
+              update
             </Button>
           </div>
         </form>
@@ -82,4 +85,4 @@ const AddPerson = ({
   );
 };
 
-export default AddPerson;
+export default EditButton;

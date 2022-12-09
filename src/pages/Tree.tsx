@@ -4,6 +4,8 @@ import api from "../api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BriefTree from "../components/BriefTree";
+import AddPerson from "../components/AddPerson";
+import { TypographyStylesProvider } from "@mantine/core";
 
 const Tree = () => {
   const { companyId } = useParams();
@@ -18,7 +20,26 @@ const Tree = () => {
   }, [companyId]);
 
   if (!person) {
-    return <div></div>;
+    return (
+      <div className="flex justify-center items-center">
+        <AddPerson
+          size="large"
+          person={{
+            name: "",
+            attributes: {
+              id: "",
+              parent: "head",
+              position: "",
+            },
+            children: [],
+          }}
+        />
+        <TypographyStylesProvider>
+          no Person is added yet, press the plus button to
+          add one{" "}
+        </TypographyStylesProvider>
+      </div>
+    );
   }
 
   return (
