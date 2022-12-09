@@ -19,7 +19,7 @@ const Home = () => {
     api.get("").then((r) => {
       dispatch(newValue(r.data));
     });
-  }, [companies]);
+  }, []);
 
   return !(companies.length > 0) ? (
     <div className="flex flex-col justify-center items-center">

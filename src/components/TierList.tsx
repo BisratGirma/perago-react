@@ -38,7 +38,10 @@ const TierList = ({ employee }: { employee: Person }) => {
         </Accordion.Item>
       </Accordion>
 
-      <Button onClick={() => navigate("/")} color="blue">
+      <Button
+        onClick={() => navigate("/")}
+        className="bg-blue-700 hover:bg-blue-900"
+      >
         Back to Home
       </Button>
     </div>
