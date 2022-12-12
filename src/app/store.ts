@@ -18,10 +18,24 @@ export const appSlice = createSlice({
   },
 });
 
+export const treeSlice = createSlice({
+  name: "tree",
+  initialState: {
+    tree: null,
+  },
+  reducers: {
+    newTree: (state, action) => {
+      state.tree = action.payload;
+    },
+  },
+});
+
 export const { newValue } = appSlice.actions;
+export const { newTree } = treeSlice.actions;
 
 export const store = configureStore({
   reducer: {
     companies: appSlice.reducer,
+    tree: treeSlice.reducer,
   },
 });

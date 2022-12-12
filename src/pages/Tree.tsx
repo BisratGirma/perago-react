@@ -6,18 +6,21 @@ import { useParams } from "react-router-dom";
 import BriefTree from "../components/BriefTree";
 import AddPerson from "../components/AddPerson";
 import { TypographyStylesProvider } from "@mantine/core";
+import { useDispatch, useSelector } from "react-redux";
+import { newTree } from "../app/store";
 
 const Tree = () => {
+  const dispatch = useDispatch();
   const { companyId } = useParams();
+  const { tree } = useSelector((state: any) => state.tree);
 
   const [person, setPerson] = useState<Person>();
   useEffect(() => {
     api.get(companyId!).then((r) => {
-      console.log(r.data);
-
       setPerson(r.data);
+      dispatch(newTree(r.data));
     });
-  }, [companyId]);
+  }, [companyId, dispatch]);
 
   if (!person) {
     return (
@@ -45,7 +48,7 @@ const Tree = () => {
   return (
     <div className="flex">
       <TierList employee={person} />
-      <BriefTree person={person} />
+      <BriefTree person={tree} />
     </div>
   );
 };

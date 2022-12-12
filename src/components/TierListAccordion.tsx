@@ -3,6 +3,8 @@ import {
   TypographyStylesProvider,
 } from "@mantine/core";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { newTree } from "../app/store";
 import { Person } from "../types/model";
 import AddPerson from "./AddPerson";
 import EditButton from "./EditButton";
@@ -19,6 +21,11 @@ const TierElement = ({
   >;
 }) => {
   const [values, setValues] = useState(item);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(newTree(values));
+  };
 
   return (
     <Accordion.Item
@@ -26,7 +33,10 @@ const TierElement = ({
       className="border-0 border-l-2"
       key={values.attributes.id}
     >
-      <Accordion.Control className="flex justify-start border-[1px solid red]">
+      <Accordion.Control
+        className="flex justify-start border-[1px solid red]"
+        onClick={handleClick}
+      >
         <TypographyStylesProvider sx={{ fontSize: 14 }}>
           {values.name}, {values.attributes.position}
         </TypographyStylesProvider>

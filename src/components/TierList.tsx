@@ -3,13 +3,20 @@ import {
   Button,
   TypographyStylesProvider,
 } from "@mantine/core";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { newTree } from "../app/store";
 import { Person } from "../types/model";
 import AddPerson from "./AddPerson";
 import TierListAccordion from "./TierListAccordion";
 
 const TierList = ({ employee }: { employee: Person }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(newTree(employee));
+  };
 
   return (
     <div className="w-1/4 h-screen border-r-[1px] border-r-slate-300 py-5 flex flex-col justify-between">
@@ -18,7 +25,10 @@ const TierList = ({ employee }: { employee: Person }) => {
         className="border-0 border-l-2"
       >
         <Accordion.Item value="customization">
-          <Accordion.Control className="flex justify-between">
+          <Accordion.Control
+            className="flex justify-between"
+            onClick={handleClick}
+          >
             <TypographyStylesProvider>
               {employee.name},{" "}
               {employee.attributes.position}

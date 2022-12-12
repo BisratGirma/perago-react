@@ -9,7 +9,7 @@ const BriefTree = ({ person }: { person: Person }) => {
         pathFunc="step"
         orientation="vertical"
         nodeSize={{ x: 240, y: 210 }}
-        translate={{ x: 400, y: 150 }}
+        translate={{ x: 411, y: 120 }}
       />
     </div>
   );
