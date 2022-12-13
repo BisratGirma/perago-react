@@ -7,6 +7,8 @@ import {
 import { IconEdit, IconTrash } from "@tabler/icons";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { newTree } from "../app/store";
 import { Person } from "../types/model";
 
 interface PersonForm {
@@ -29,6 +31,7 @@ const EditButton = ({
 }) => {
   const [open, handleOpen] = useState(false);
   const handleModal = () => handleOpen(!open);
+  const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm<PersonForm>();
   const onSubmit: SubmitHandler<PersonForm> = (data) => {
@@ -37,11 +40,13 @@ const EditButton = ({
       attributes: { position, ...remaining },
       ...filtred
     } = person;
-    setValues({
+    const updatedPerson = {
       name: data.name,
       attributes: { position: data.position, ...remaining },
       ...filtred,
-    });
+    };
+    setValues(updatedPerson);
+    dispatch(newTree(updatedPerson));
     handleModal();
   };
 
